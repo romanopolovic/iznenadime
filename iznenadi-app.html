@@ -1,0 +1,810 @@
+<!DOCTYPE html>
+<html lang="hr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Iznenadi • iOS</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&amp;family=SF+Pro+Display:wght@400;500;600&amp;display=swap');
+        
+        :root {
+            --ios-blue: #007AFF;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", Inter, system-ui, sans-serif;
+        }
+        
+        .ios-header {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(20px);
+        }
+        
+        .app-container {
+            max-width: 430px;
+            margin: 0 auto;
+            min-height: 100vh;
+            box-shadow: 0 0 0 12px #111;
+            border-radius: 60px;
+            overflow: hidden;
+            position: relative;
+        }
+        
+        .ios-screen {
+            background: #f8f9fa;
+        }
+        
+        .ios-button {
+            transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        
+        .ios-button:active {
+            transform: scale(0.97);
+        }
+        
+        .surprise-card {
+            transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+            box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.05), 0 4px 6px -4px rgb(0 0 0 / 0.05);
+        }
+        
+        .ios-nav {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(20px);
+        }
+        
+        .nav-item {
+            transition: color 0.2s ease;
+        }
+        
+        .nav-item.active {
+            color: #007AFF;
+        }
+        
+        .surprise-text {
+            font-size: 1.05rem;
+            line-height: 1.5;
+        }
+        
+        .section-header {
+            font-weight: 700;
+            letter-spacing: -.025em;
+        }
+        
+        .ios-shadow {
+            box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+        }
+        
+        .surprise-emoji {
+            font-size: 3.5rem;
+            line-height: 1;
+        }
+        
+        .ios-tab {
+            transition: all .2s ease;
+        }
+        
+        .app-content {
+            padding-bottom: 70px;
+        }
+        
+        .favorite-item {
+            transition: all 0.2s ease;
+        }
+    </style>
+</head>
+<body class="bg-zinc-950 flex items-center justify-center min-h-screen p-4">
+    <!-- iPhone frame -->
+    <div class="app-container bg-white w-full max-w-[430px] rounded-[60px] overflow-hidden shadow-2xl border border-zinc-800 mx-auto">
+        
+        <!-- Status bar -->
+        <div class="h-11 bg-white flex items-center justify-between px-8 pt-2 text-xs font-semibold text-black">
+            <div class="flex items-center">
+                <span>09:41</span>
+            </div>
+            <div class="flex items-center gap-x-1.5">
+                <i class="fa-solid fa-signal text-xs"></i>
+                <i class="fa-solid fa-wifi text-xs"></i>
+                <div class="flex items-center">
+                    <span class="text-xs font-semibold">98</span>
+                    <i class="fa-solid fa-battery-full ml-1 text-sm"></i>
+                </div>
+            </div>
+        </div>
+        
+        <!-- App Header -->
+        <div class="ios-header px-5 pt-1 pb-3 flex items-center justify-between border-b border-zinc-100">
+            <div class="flex items-center gap-x-3">
+                <div class="w-9 h-9 bg-gradient-to-br from-indigo-500 to-violet-500 rounded-2xl flex items-center justify-center shadow-inner">
+                    <i class="fa-solid fa-gift text-white text-xl"></i>
+                </div>
+                <div>
+                    <h1 class="text-2xl font-extrabold tracking-tighter text-zinc-900">Iznenadi</h1>
+                </div>
+            </div>
+            
+            <div class="flex items-center gap-x-1.5">
+                <div class="w-8 h-8 bg-zinc-100 rounded-2xl flex items-center justify-center">
+                    <i class="fa-solid fa-user text-zinc-600 text-sm"></i>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Main Content -->
+        <div class="ios-screen min-h-[640px]">
+            
+            <!-- Home Tab -->
+            <div id="home-tab" class="app-content">
+                <!-- Greeting -->
+                <div class="px-5 pt-6 pb-2">
+                    <div class="flex items-center justify-between">
+                        <div>
+                            <p class="text-zinc-500 text-sm font-medium">Dobrodošli natrag,</p>
+                            <h2 class="text-3xl font-extrabold tracking-tighter text-zinc-900">Ana!</h2>
+                        </div>
+                        <div class="text-right">
+                            <div class="text-xs px-3 py-1 bg-emerald-100 text-emerald-700 rounded-2xl inline-flex items-center font-semibold text-xs">
+                                <i class="fa-solid fa-calendar-check mr-1.5"></i>
+                                <span>Streak: 14</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Big Surprise Button -->
+                <div class="px-5 pt-4 pb-2">
+                    <button onclick="surpriseMe()"
+                            class="ios-button w-full py-5 bg-gradient-to-r from-indigo-600 to-violet-600 hover:from-indigo-700 hover:to-violet-700 text-white font-extrabold text-2xl shadow-lg shadow-indigo-200/70 rounded-3xl flex items-center justify-center gap-x-3 active:scale-[0.985]">
+                        <i class="fa-solid fa-magic text-xl"></i>
+                        <span>Iznenadi me!</span>
+                    </button>
+                    <p class="text-center text-xs text-zinc-500 mt-3 font-medium">Tapni za novo iznenađenje</p>
+                </div>
+                
+                <!-- Surprise Display Area -->
+                <div id="surprise-display" class="hidden px-5 py-1">
+                    <div class="bg-white border border-zinc-100 rounded-3xl p-5 ios-shadow">
+                        <div id="surprise-header" class="flex items-center justify-between mb-3">
+                            <div class="flex items-center gap-x-2">
+                                <div id="surprise-badge" 
+                                     class="px-3 py-1 text-xs font-extrabold rounded-2xl flex items-center">
+                                    <!-- Filled by JS -->
+                                </div>
+                            </div>
+                            <div id="surprise-date" class="text-xs text-zinc-400 font-medium"></div>
+                        </div>
+                        
+                        <div class="flex items-start gap-x-4">
+                            <div id="surprise-emoji" class="surprise-emoji flex-shrink-0"></div>
+                            
+                            <div class="flex-1">
+                                <div id="surprise-text" 
+                                     class="surprise-text font-semibold text-zinc-900 leading-tight"></div>
+                            </div>
+                        </div>
+                        
+                        <div class="flex items-center gap-x-2 mt-5">
+                            <button onclick="saveToFavorites()" 
+                                    class="flex-1 flex items-center justify-center gap-x-2 bg-zinc-100 hover:bg-zinc-200 transition-colors font-semibold text-sm text-zinc-700 py-[9px] px-5 rounded-2xl">
+                                <i class="fa-solid fa-heart"></i>
+                                <span class="font-semibold text-sm">Sačuvaj</span>
+                            </button>
+                            
+                            <button onclick="surpriseMe()" 
+                                    class="flex-1 flex items-center justify-center gap-x-2 bg-indigo-50 hover:bg-indigo-100 transition-colors text-indigo-700 font-semibold text-sm py-[9px] px-5 rounded-2xl">
+                                <i class="fa-solid fa-redo"></i>
+                                <span class="font-semibold text-sm">Novo</span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Quick categories -->
+                <div class="px-5 pt-6">
+                    <p class="font-semibold text-xs px-1 text-zinc-500 tracking-wider mb-3">KATEGORIJE</p>
+                    
+                    <div class="grid grid-cols-4 gap-3">
+                        <div onclick="filterByCategory('šala')" class="cursor-pointer bg-white border border-zinc-100 rounded-3xl p-3 flex flex-col items-center justify-center text-center hover:border-indigo-200 transition-colors">
+                            <div class="text-2xl mb-1">😂</div>
+                            <div class="text-xs font-bold text-zinc-700">Šale</div>
+                        </div>
+                        <div onclick="filterByCategory('izazov')" class="cursor-pointer bg-white border border-zinc-100 rounded-3xl p-3 flex flex-col items-center justify-center text-center hover:border-indigo-200 transition-colors">
+                            <div class="text-2xl mb-1">🎨</div>
+                            <div class="text-xs font-bold text-zinc-700">Izazov</div>
+                        </div>
+                        <div onclick="filterByCategory('misao')" class="cursor-pointer bg-white border border-zinc-100 rounded-3xl p-3 flex flex-col items-center justify-center text-center hover:border-indigo-200 transition-colors">
+                            <div class="text-2xl mb-1">🌟</div>
+                            <div class="text-xs font-bold text-zinc-700">Misli</div>
+                        </div>
+                        <div onclick="filterByCategory('zanimljivost')" class="cursor-pointer bg-white border border-zinc-100 rounded-3xl p-3 flex flex-col items-center justify-center text-center hover:border-indigo-200 transition-colors">
+                            <div class="text-2xl mb-1">🧠</div>
+                            <div class="text-xs font-bold text-zinc-700">Zanimljivo</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Favorites Tab -->
+            <div id="favorites-tab" class="app-content hidden px-5 pt-6">
+                <div class="flex items-center justify-between mb-4 px-1">
+                    <h3 class="section-header text-xl text-zinc-900">Favoriti</h3>
+                    <span id="favorites-count" class="text-xs px-3 py-1 bg-zinc-100 text-zinc-500 font-extrabold rounded-2xl">0</span>
+                </div>
+                
+                <div id="favorites-list" class="space-y-2">
+                    <!-- Populated by JS -->
+                    <div class="text-center py-8 text-sm text-zinc-400">
+                        <i class="fa-solid fa-heart text-3xl mb-2 block text-zinc-200"></i>
+                        <p>Nema spremljenih iznenađenja.</p>
+                        <p class="text-xs">Dodaj neka klikom na srce!</p>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Settings Tab -->
+            <div id="settings-tab" class="app-content hidden px-5 pt-6">
+                <h3 class="section-header text-xl px-1 mb-5 text-zinc-900">Postavke</h3>
+                
+                <div class="space-y-2">
+                    <div class="bg-white border border-zinc-100 rounded-3xl p-4 flex items-center justify-between">
+                        <div class="flex items-center gap-x-3">
+                            <i class="fa-solid fa-bell text-xl text-indigo-500"></i>
+                            <div>
+                                <div class="font-semibold">Dnevna obavijest</div>
+                                <div class="text-xs text-zinc-400">Svaki dan u 8:00</div>
+                            </div>
+                        </div>
+                        <label class="relative inline-flex items-center cursor-pointer">
+                            <input type="checkbox" checked class="sr-only peer">
+                            <div class="w-9 h-5 bg-zinc-200 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[1px] after:left-[1px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-4 after:w-4 after:transition-all peer-checked:bg-indigo-600"></div>
+                        </label>
+                    </div>
+                    
+                    <div class="bg-white border border-zinc-100 rounded-3xl p-4 flex items-center justify-between">
+                        <div class="flex items-center gap-x-3">
+                            <i class="fa-solid fa-palette text-xl text-violet-500"></i>
+                            <div>
+                                <div class="font-semibold">Tamni mod</div>
+                                <div class="text-xs text-zinc-400">Automatski</div>
+                            </div>
+                        </div>
+                        <label class="relative inline-flex items-center cursor-pointer">
+                            <input type="checkbox" class="sr-only peer">
+                            <div class="w-9 h-5 bg-zinc-200 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[1px] after:left-[1px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-4 after:w-4 after:transition-all peer-checked:bg-indigo-600"></div>
+                        </label>
+                    </div>
+                    
+                    <div class="bg-white border border-zinc-100 rounded-3xl p-4 flex items-center justify-between">
+                        <div class="flex items-center gap-x-3">
+                            <i class="fa-solid fa-history text-xl text-emerald-500"></i>
+                            <div>
+                                <div class="font-semibold">Povijest iznenađenja</div>
+                            </div>
+                        </div>
+                        <span class="px-3 py-1 text-xs bg-emerald-100 text-emerald-600 font-bold rounded-2xl">47</span>
+                    </div>
+                    
+                    <div onclick="resetApp()" class="cursor-pointer flex items-center justify-between px-4 py-[13px] bg-white border border-zinc-100 rounded-3xl text-sm">
+                        <div class="flex items-center gap-x-3">
+                            <i class="fa-solid fa-trash text-red-500"></i>
+                            <span class="font-semibold text-red-500">Očisti sve favorite</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="mt-8 px-1 text-center">
+                    <div class="text-xs text-zinc-400">Iznenadi v1.3.2 • Svi podaci su offline</div>
+                </div>
+            </div>
+            
+        </div>
+        
+        <!-- Bottom Navigation -->
+        <div class="ios-nav border-t border-zinc-200 h-16 px-2 flex items-center justify-around text-sm">
+            <div onclick="switchTab('home')" class="nav-item flex flex-col items-center justify-center cursor-pointer text-indigo-600 active-tab" id="nav-home">
+                <i class="fa-solid fa-home text-xl"></i>
+                <span class="text-[10px] font-bold mt-0.5">Početna</span>
+            </div>
+            
+            <div onclick="switchTab('favorites')" class="nav-item flex flex-col items-center justify-center cursor-pointer text-zinc-500" id="nav-favorites">
+                <i class="fa-solid fa-heart text-xl"></i>
+                <span class="text-[10px] font-bold mt-0.5">Favoriti</span>
+            </div>
+            
+            <div onclick="switchTab('settings')" class="nav-item flex flex-col items-center justify-center cursor-pointer text-zinc-500" id="nav-settings">
+                <i class="fa-solid fa-cog text-xl"></i>
+                <span class="text-[10px] font-bold mt-0.5">Postavke</span>
+            </div>
+        </div>
+        
+    </div>
+    
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        // Tailwind script
+        function initTailwind() {
+            document.documentElement.style.setProperty('--accent', '#007AFF');
+        }
+        
+        // Surprise data
+        let surprises = [
+            { id: 1, type: "šala", text: "Zašto je računar otišao kod doktora? Jer je imao virus!", emoji: "😂" },
+            { id: 2, type: "šala", text: "Što kaže mačka kad je sretna? Mijauuuuu!", emoji: "😺" },
+            { id: 3, type: "šala", text: "Zašto su ribe loše u školi? Jer imaju puno plivačkih lekcija!", emoji: "🐟" },
+            { id: 4, type: "izazov", text: "Nacrtaj ono što te trenutno najviše raduje.", emoji: "🎨" },
+            { id: 5, type: "izazov", text: "Pošalji kompliment nekom koga ne poznaješ.", emoji: "💌" },
+            { id: 6, type: "izazov", text: "Uživaj u 5 minuta tišine bez telefona.", emoji: "🧘" },
+            { id: 7, type: "misao", text: "Ti si dovoljno dobar, baš onakav kakav jesi.", emoji: "🌟" },
+            { id: 8, type: "misao", text: "Mali koraci svaki dan dovode do velikih promjena.", emoji: "🚀" },
+            { id: 9, type: "misao", text: "Sve što ti treba već je u tebi.", emoji: "✨" },
+            { id: 10, type: "zanimljivost", text: "Medvjedi mogu trčati brzinom većom od 50 km/h!", emoji: "🐻" },
+            { id: 11, type: "zanimljivost", text: "Oktopodi imaju tri srca.", emoji: "🐙" },
+            { id: 12, type: "zanimljivost", text: "Banana je bobica, a jagoda nije.", emoji: "🍌" },
+            { id: 13, type: "radost", text: "Kupi sebi omiljeni sladoled i uživaj u trenutku.", emoji: "🍦" },
+            { id: 14, type: "radost", text: "Nazovi nekoga koga voliš i reci mu zašto ga voliš.", emoji: "❤️" },
+            { id: 15, type: "radost", text: "Slušaj svoju omiljenu pjesmu s punim volumenom.", emoji: "🎵" },
+            { id: 16, type: "šala", text: "Zašto je programer otišao na terapiju? Jer je imao previše bugova u životu!", emoji: "💻" },
+            { id: 17, type: "izazov", text: "Napiši tri stvari za koje si danas zahvalan/a.", emoji: "📝" },
+            { id: 18, type: "misao", text: "Dan je prilika da napraviš nešto lijepo.", emoji: "🌈" },
+            { id: 19, type: "zanimljivost", text: "Ljudi prosječno sanjaju 4-6 puta po noći.", emoji: "🌙" },
+            { id: 20, type: "radost", text: "Otvori prozor i udahni duboko svjež zrak.", emoji: "🌬️" }
+        ]
+        
+        let currentSurprise = null
+        let favorites = []
+        
+        // Load favorites
+        function loadFavorites() {
+            const saved = localStorage.getItem('iznenadi_favorites')
+            if (saved) {
+                favorites = JSON.parse(saved)
+            }
+            updateFavoritesCount()
+        }
+        
+        function saveFavorites() {
+            localStorage.setItem('iznenadi_favorites', JSON.stringify(favorites))
+            updateFavoritesCount()
+        }
+        
+        function updateFavoritesCount() {
+            const countEl = document.getElementById('favorites-count')
+            if (countEl) countEl.innerHTML = favorites.length
+        }
+        
+        // Switch tabs
+        function switchTab(tab) {
+            // Hide all tabs
+            document.getElementById('home-tab').classList.add('hidden')
+            document.getElementById('favorites-tab').classList.add('hidden')
+            document.getElementById('settings-tab').classList.add('hidden')
+            
+            // Remove active from all nav
+            document.getElementById('nav-home').classList.remove('active', 'text-indigo-600')
+            document.getElementById('nav-home').classList.add('text-zinc-500')
+            
+            document.getElementById('nav-favorites').classList.remove('active', 'text-indigo-600')
+            document.getElementById('nav-favorites').classList.add('text-zinc-500')
+            
+            document.getElementById('nav-settings').classList.remove('active', 'text-indigo-600')
+            document.getElementById('nav-settings').classList.add('text-zinc-500')
+            
+            if (tab === 'home') {
+                document.getElementById('home-tab').classList.remove('hidden')
+                document.getElementById('nav-home').classList.add('active', 'text-indigo-600')
+                document.getElementById('nav-home').classList.remove('text-zinc-500')
+            } else if (tab === 'favorites') {
+                document.getElementById('favorites-tab').classList.remove('hidden')
+                document.getElementById('nav-favorites').classList.add('active', 'text-indigo-600')
+                document.getElementById('nav-favorites').classList.remove('text-zinc-500')
+                renderFavorites()
+            } else if (tab === 'settings') {
+                document.getElementById('settings-tab').classList.remove('hidden')
+                document.getElementById('nav-settings').classList.add('active', 'text-indigo-600')
+                document.getElementById('nav-settings').classList.remove('text-zinc-500')
+            }
+        }
+        
+        // Surprise me
+        function surpriseMe() {
+            const randomIndex = Math.floor(Math.random() * surprises.length)
+            currentSurprise = surprises[randomIndex]
+            
+            const display = document.getElementById('surprise-display')
+            display.classList.remove('hidden')
+            
+            // Set content
+            document.getElementById('surprise-emoji').innerHTML = currentSurprise.emoji
+            
+            const textEl = document.getElementById('surprise-text')
+            textEl.innerHTML = currentSurprise.text
+            
+            // Badge
+            const badge = document.getElementById('surprise-badge')
+            badge.innerHTML = ''
+            
+            let badgeHTML = ''
+            let bgColor = ''
+            
+            switch(currentSurprise.type) {
+                case 'šala':
+                    badgeHTML = `<i class="fa-solid fa-face-grin-squint mr-1"></i> ŠALA`
+                    bgColor = 'bg-yellow-100 text-yellow-700'
+                    break
+                case 'izazov':
+                    badgeHTML = `<i class="fa-solid fa-pencil-alt mr-1"></i> IZAZOV`
+                    bgColor = 'bg-pink-100 text-pink-700'
+                    break
+                case 'misao':
+                    badgeHTML = `<i class="fa-solid fa-lightbulb mr-1"></i> MISAO`
+                    bgColor = 'bg-sky-100 text-sky-700'
+                    break
+                case 'zanimljivost':
+                    badgeHTML = `<i class="fa-solid fa-globe mr-1"></i> ZANIMLJIVOST`
+                    bgColor = 'bg-emerald-100 text-emerald-700'
+                    break
+                case 'radost':
+                    badgeHTML = `<i class="fa-solid fa-sun mr-1"></i> RADOST`
+                    bgColor = 'bg-orange-100 text-orange-700'
+                    break
+            }
+            
+            badge.className = `px-3 py-1 text-xs font-extrabold rounded-2xl flex items-center ${bgColor}`
+            badge.innerHTML = badgeHTML
+            
+            // Date
+            const dateEl = document.getElementById('surprise-date')
+            const now = new Date()
+            dateEl.innerHTML = now.toLocaleDateString('hr-HR', {month:'short', day:'numeric'})
+            
+            // Scroll to display
+            display.scrollIntoView({ behavior: "smooth", block: "center" })
+        }
+        
+        // Save to favorites
+        function saveToFavorites() {
+            if (!currentSurprise) return
+            
+            // Check if already exists
+            const exists = favorites.find(f => f.id === currentSurprise.id)
+            if (exists) {
+                const toast = document.createElement('div')
+                toast.style.cssText = 'position:fixed;bottom:80px;left:50%;transform:translate(-50%,0);'
+                toast.className = `px-4 py-2 bg-zinc-900 text-white text-xs font-medium shadow-lg rounded-2xl flex items-center gap-x-2`
+                toast.innerHTML = `<span>Već je u favoritima!</span>`
+                document.body.appendChild(toast)
+                
+                setTimeout(() => {
+                    toast.style.transition = 'all .3s ease'
+                    toast.style.opacity = '0'
+                    setTimeout(() => toast.remove(), 200)
+                }, 1600)
+                return
+            }
+            
+            favorites.unshift(currentSurprise)
+            saveFavorites()
+            
+            // Show nice confirmation toast
+            const toast = document.createElement('div')
+            toast.style.cssText = 'position:fixed;bottom:80px;left:50%;transform:translate(-50%,0);'
+            toast.className = `px-4 py-2.5 bg-emerald-600 text-white text-sm font-semibold shadow-xl rounded-3xl flex items-center gap-x-2`
+            toast.innerHTML = `
+                <i class="fa-solid fa-check-double"></i> 
+                <span>Spremljeno u favorite!</span>
+            `
+            document.body.appendChild(toast)
+            
+            setTimeout(() => {
+                toast.style.transition = 'all .3s ease'
+                toast.style.opacity = '0'
+                setTimeout(() => toast.remove(), 180)
+            }, 1700)
+            
+            // Update favorites count if tab is open
+            const countEl = document.getElementById('favorites-count')
+            if (countEl) countEl.innerHTML = favorites.length
+        }
+        
+        // Render favorites
+        function renderFavorites() {
+            const container = document.getElementById('favorites-list')
+            container.innerHTML = ''
+            
+            if (favorites.length === 0) {
+                container.innerHTML = `
+                    <div class="text-center py-8 text-sm text-zinc-400">
+                        <i class="fa-solid fa-heart text-3xl mb-2 block text-zinc-200"></i>
+                        <p>Nema spremljenih iznenađenja.</p>
+                        <p class="text-xs mt-1">Dodaj neka klikom na srce!</p>
+                    </div>
+                `
+                return
+            }
+            
+            favorites.forEach((fav, index) => {
+                const div = document.createElement('div')
+                div.className = `favorite-item flex bg-white border border-zinc-100 rounded-3xl p-4 items-start gap-x-3`
+                
+                let badgeHTML = ''
+                
+                switch(fav.type) {
+                    case 'šala':
+                        badgeHTML = `<span class="px-2.5 py-[1px] text-xs font-extrabold bg-yellow-100 text-yellow-700 rounded-2xl">ŠALA</span>`
+                        break
+                    case 'izazov':
+                        badgeHTML = `<span class="px-2.5 py-[1px] text-xs font-extrabold bg-pink-100 text-pink-700 rounded-2xl">IZAZOV</span>`
+                        break
+                    case 'misao':
+                        badgeHTML = `<span class="px-2.5 py-[1px] text-xs font-extrabold bg-sky-100 text-sky-700 rounded-2xl">MISAO</span>`
+                        break
+                    case 'zanimljivost':
+                        badgeHTML = `<span class="px-2.5 py-[1px] text-xs font-extrabold bg-emerald-100 text-emerald-700 rounded-2xl">ZANIMLJIVOST</span>`
+                        break
+                    case 'radost':
+                        badgeHTML = `<span class="px-2.5 py-[1px] text-xs font-extrabold bg-orange-100 text-orange-700 rounded-2xl">RADOST</span>`
+                        break
+                }
+                
+                div.innerHTML = `
+                    <div class="flex-1">
+                        <div class="flex items-center gap-x-2 mb-1">
+                            <div class="text-2xl">${fav.emoji}</div>
+                            ${badgeHTML}
+                        </div>
+                        
+                        <div class="font-semibold text-sm text-zinc-800 leading-tight pr-1">
+                            ${fav.text}
+                        </div>
+                    </div>
+                    
+                    <div class="flex flex-col gap-y-[3px] pt-1">
+                        <button onclick="removeFavorite(${index}, this)" class="w-7 h-7 flex items-center justify-center text-red-400 hover:text-red-600">
+                            <i class="fa-solid fa-trash text-xs"></i>
+                        </button>
+                        
+                        <button onclick="useFavorite(${index})" class="w-7 h-7 flex items-center justify-center text-emerald-400 hover:text-emerald-600">
+                            <i class="fa-solid fa-redo text-xs"></i>
+                        </button>
+                    </div>
+                `
+                
+                container.appendChild(div)
+            })
+        }
+        
+        function removeFavorite(index, element) {
+            favorites.splice(index, 1)
+            saveFavorites()
+            renderFavorites()
+            
+            // Update count
+            const countEl = document.getElementById('favorites-count')
+            if (countEl) countEl.innerHTML = favorites.length
+        }
+        
+        function useFavorite(index) {
+            const fav = favorites[index]
+            
+            // Switch to home and display it
+            switchTab('home')
+            
+            // Set as current
+            currentSurprise = fav
+            
+            const display = document.getElementById('surprise-display')
+            display.classList.remove('hidden')
+            
+            document.getElementById('surprise-emoji').innerHTML = fav.emoji
+            document.getElementById('surprise-text').innerHTML = fav.text
+            
+            const badge = document.getElementById('surprise-badge')
+            let badgeHTML = ''
+            let bgColor = ''
+            
+            switch(fav.type) {
+                case 'šala':
+                    badgeHTML = `<i class="fa-solid fa-face-grin-squint mr-1"></i> ŠALA`
+                    bgColor = 'bg-yellow-100 text-yellow-700'
+                    break
+                case 'izazov':
+                    badgeHTML = `<i class="fa-solid fa-pencil-alt mr-1"></i> IZAZOV`
+                    bgColor = 'bg-pink-100 text-pink-700'
+                    break
+                case 'misao':
+                    badgeHTML = `<i class="fa-solid fa-lightbulb mr-1"></i> MISAO`
+                    bgColor = 'bg-sky-100 text-sky-700'
+                    break
+                case 'zanimljivost':
+                    badgeHTML = `<i class="fa-solid fa-globe mr-1"></i> ZANIMLJIVOST`
+                    bgColor = 'bg-emerald-100 text-emerald-700'
+                    break
+                case 'radost':
+                    badgeHTML = `<i class="fa-solid fa-sun mr-1"></i> RADOST`
+                    bgColor = 'bg-orange-100 text-orange-700'
+                    break
+            }
+            
+            badge.className = `px-3 py-1 text-xs font-extrabold rounded-2xl flex items-center ${bgColor}`
+            badge.innerHTML = badgeHTML
+            
+            const dateEl = document.getElementById('surprise-date')
+            dateEl.innerHTML = new Date().toLocaleDateString('hr-HR', {month:'short', day:'numeric'})
+            
+            // scroll
+            setTimeout(() => {
+                display.scrollIntoView({ behavior: "smooth", block: "center" })
+            }, 400)
+        }
+        
+        // Filter by category
+        function filterByCategory(category) {
+            const filtered = surprises.filter(s => s.type === category)
+            if (filtered.length === 0) return
+            
+            // pick random from filtered
+            const random = filtered[Math.floor(Math.random() * filtered.length)]
+            currentSurprise = random
+            
+            // show display
+            const display = document.getElementById('surprise-display')
+            display.classList.remove('hidden')
+            
+            document.getElementById('surprise-emoji').innerHTML = currentSurprise.emoji
+            document.getElementById('surprise-text').innerHTML = currentSurprise.text
+            
+            const badge = document.getElementById('surprise-badge')
+            let badgeHTML = ''
+            let bgColor = ''
+            
+            switch(currentSurprise.type) {
+                case 'šala':
+                    badgeHTML = `<i class="fa-solid fa-face-grin-squint mr-1"></i> ŠALA`
+                    bgColor = 'bg-yellow-100 text-yellow-700'
+                    break
+                case 'izazov':
+                    badgeHTML = `<i class="fa-solid fa-pencil-alt mr-1"></i> IZAZOV`
+                    bgColor = 'bg-pink-100 text-pink-700'
+                    break
+                case 'misao':
+                    badgeHTML = `<i class="fa-solid fa-lightbulb mr-1"></i> MISAO`
+                    bgColor = 'bg-sky-100 text-sky-700'
+                    break
+                case 'zanimljivost':
+                    badgeHTML = `<i class="fa-solid fa-globe mr-1"></i> ZANIMLJIVOST`
+                    bgColor = 'bg-emerald-100 text-emerald-700'
+                    break
+                case 'radost':
+                    badgeHTML = `<i class="fa-solid fa-sun mr-1"></i> RADOST`
+                    bgColor = 'bg-orange-100 text-orange-700'
+                    break
+            }
+            
+            badge.className = `px-3 py-1 text-xs font-extrabold rounded-2xl flex items-center ${bgColor}`
+            badge.innerHTML = badgeHTML
+            
+            const dateEl = document.getElementById('surprise-date')
+            dateEl.innerHTML = new Date().toLocaleDateString('hr-HR', {month:'short', day:'numeric'})
+            
+            display.scrollIntoView({ behavior: "smooth", block: "center" })
+        }
+        
+        function resetApp() {
+            if (confirm('Jesi li siguran da želiš obrisati sve favorite?')) {
+                favorites = []
+                localStorage.removeItem('iznenadi_favorites')
+                updateFavoritesCount()
+                
+                // Refresh if favorites tab is open
+                if (!document.getElementById('favorites-tab').classList.contains('hidden')) {
+                    renderFavorites()
+                }
+                
+                const toast = document.createElement('div')
+                toast.style.cssText = 'position:fixed;bottom:80px;left:50%;transform:translate(-50%,0);'
+                toast.className = `px-4 py-2 bg-zinc-900 text-white text-sm font-medium shadow-lg rounded-3xl`
+                toast.innerHTML = `<span>Favoriti su obrisani.</span>`
+                document.body.appendChild(toast)
+                
+                setTimeout(() => {
+                    toast.style.transition = 'all .3s ease'
+                    toast.style.opacity = '0'
+                    setTimeout(() => toast.remove(), 200)
+                }, 1600)
+            }
+        }
+        
+        // Initialize the app
+        function initApp() {
+            initTailwind()
+            loadFavorites()
+            
+            // Show initial home tab
+            document.getElementById('home-tab').classList.remove('hidden')
+            
+            // Make the nav-home active
+            document.getElementById('nav-home').classList.add('text-indigo-600')
+            
+            // Demo: Show a random surprise after 1.5 seconds (only once)
+            setTimeout(() => {
+                const display = document.getElementById('surprise-display')
+                if (display.classList.contains('hidden') && window.location.hash !== '#no-demo') {
+                    const random = surprises[Math.floor(Math.random() * surprises.length)]
+                    currentSurprise = random
+                    
+                    display.classList.remove('hidden')
+                    
+                    document.getElementById('surprise-emoji').innerHTML = currentSurprise.emoji
+                    document.getElementById('surprise-text').innerHTML = currentSurprise.text
+                    
+                    const badge = document.getElementById('surprise-badge')
+                    let badgeHTML = ''
+                    let bgColor = ''
+                    
+                    switch(currentSurprise.type) {
+                        case 'šala':
+                            badgeHTML = `<i class="fa-solid fa-face-grin-squint mr-1"></i> ŠALA`
+                            bgColor = 'bg-yellow-100 text-yellow-700'
+                            break
+                        case 'izazov':
+                            badgeHTML = `<i class="fa-solid fa-pencil-alt mr-1"></i> IZAZOV`
+                            bgColor = 'bg-pink-100 text-pink-700'
+                            break
+                        case 'misao':
+                            badgeHTML = `<i class="fa-solid fa-lightbulb mr-1"></i> MISAO`
+                            bgColor = 'bg-sky-100 text-sky-700'
+                            break
+                        case 'zanimljivost':
+                            badgeHTML = `<i class="fa-solid fa-globe mr-1"></i> ZANIMLJIVOST`
+                            bgColor = 'bg-emerald-100 text-emerald-700'
+                            break
+                        case 'radost':
+                            badgeHTML = `<i class="fa-solid fa-sun mr-1"></i> RADOST`
+                            bgColor = 'bg-orange-100 text-orange-700'
+                            break
+                    }
+                    
+                    badge.className = `px-3 py-1 text-xs font-extrabold rounded-2xl flex items-center ${bgColor}`
+                    badge.innerHTML = badgeHTML
+                    
+                    const dateEl = document.getElementById('surprise-date')
+                    dateEl.innerHTML = new Date().toLocaleDateString('hr-HR', {month:'short', day:'numeric'})
+                }
+            }, 1600)
+            
+            // Keyboard support (for demo)
+            document.addEventListener('keydown', function(e) {
+                if (e.key === "/" && document.getElementById('home-tab').classList.contains('hidden') === false) {
+                    e.preventDefault()
+                    surpriseMe()
+                }
+            })
+            
+            // Bonus: Click anywhere on header to get new surprise
+            const header = document.querySelector('.ios-header')
+            if (header) {
+                header.addEventListener('click', function() {
+                    const homeTab = document.getElementById('home-tab')
+                    if (!homeTab.classList.contains('hidden')) {
+                        surpriseMe()
+                    }
+                })
+            }
+            
+            console.log('%c[Iznenadi] iOS app initialized successfully.', 'color:#64748b')
+        }
+        
+        // Boot the app
+        window.onload = function() {
+            initApp()
+        }
+        
+        // Expose some functions in case needed
+        window.IznenadiApp = {
+            surprise: () => surpriseMe(),
+            reset: () => resetApp()
+        }
+    </script>
+</body>
+</html>
